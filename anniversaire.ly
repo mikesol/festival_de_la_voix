@@ -97,10 +97,19 @@ clarinetOne = \relative c' {
 
 bassoonOne = \relative c' {
   \clef bass
-  b4\f b8-! b-! b-! b8. bes |
-  a8. a16-. a-. a-. a8. a a gis |
-  fis fis16-. fis fis fis8. fis fis fis |
-  fis2. fis4. |
+  b4.\f b8-! b-! b-! b8 bes a |
+  a8. a16-. a-. a-. a8. a gis g |
+  fis fis16-. fis fis fis8. fis fis gis |
+  a4. fis4. b |
+  e, gis2. |
+  a4. fis2. |
+  b2. fis4. |
+  gis16. e fis gis a b cis dis e dis cis b |
+  gis4. e2. |
+  fis4. e2. ~ |
+  e4. r4. e |
+  gis2. gis |
+  a fis |
 }
 
 trumpetOne = \relative c'' {
@@ -118,8 +127,8 @@ trumpetOne = \relative c'' {
   cis4. r a'4 a8 |
   gis2. e2.
   fis1.
-  e2. ~ e4. ~ |
-  e2. ~ e4. |
+  e8. \times 2/3 { e16. e e } e8 e e e e e |
+  b'2. ~ b4. |
 }
 
 trumpetTwo = \relative c'' {
@@ -258,6 +267,43 @@ tuba = \relative c {
   e2. ~ e4. |
 }
 
+timpani = \relative c {
+  \clef bass
+  b2. ~ b8. fis |
+  b2. ~ b8. fis |
+  b2. fis8 fis fis |
+  b2. b4. |
+  e2. ~ e4. |
+  b2. b8 b b |
+  b2. b4. |
+  e,2. b'8 b b |
+  e2. b4. |
+  a2. e8 e e |
+  a4. r4. a |
+  b2. b |
+  b b |
+  e2. b8 b b |
+  e,2. ~ e4. |
+}
+
+percussion = \drummode {
+  R4.*3 |
+  R4.*3 |
+  R4.*3 |
+  R4.*3 |
+  cymr2.\f r4. |
+  r4. cymc\ff r |
+  R4.*3 |
+  r4. cymc r |
+  R4.*3
+  R4.*3 
+  R4.*3 
+  R1. |
+  R1. |
+  R4.*3 |
+  cymc2. ~ cymc4. |
+}
+
 birthdayProto = << 
     \new StaffGroup <<
       \new StaffGroup \with{instrumentName="Flutes"} <<
@@ -269,6 +315,9 @@ birthdayProto = <<
       >>
       \new StaffGroup \with{instrumentName="Clarinets"} <<
         \new Staff = "clarinet1" \with {instrumentName="I" midiInstrument=#"clarinet"} \new Voice { << \marks \clarinetOne >> }
+      >>
+      \new StaffGroup \with{instrumentName="Bassoons"} <<
+        \new Staff = "bassoon1" \with {instrumentName="I" midiInstrument=#"bassoon"} \new Voice { << \marks \bassoonOne >> }
       >>
     >>
     \new StaffGroup <<
@@ -286,6 +335,10 @@ birthdayProto = <<
         \new Staff = "trombone2" \with {instrumentName="II" midiInstrument=#"trombone"} \new Voice { \tromboneTwo }
       >>
       \new Staff = "tuba2" \with {instrumentName="Tuba" midiInstrument=#"tuba"} \new Voice { \tuba }
+    >>
+    \new StaffGroup \with{instrumentName="Percussion"} <<
+      \new Staff = "timpani2" \with {instrumentName="Tuba" midiInstrument=#"timpani"} \new Voice { \timpani }
+      \new DrumStaff = "timpani2" \with {instrumentName="Tuba" midiInstrument=#"timpani"} \new DrumVoice { \percussion }
     >>
   >>
 
