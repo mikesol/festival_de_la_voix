@@ -291,12 +291,12 @@ percussion = \drummode {
   R4.*3 |
   R4.*3 |
   R4.*3 |
-  cymr2.\f r4. |
+  cymc2.\f r4. |
   r4. cymc\ff r |
   R4.*3 |
   r4. cymc r |
   R4.*3
-  R4.*3 
+  r4. cymc r |
   R4.*3 
   R1. |
   R1. |
@@ -337,8 +337,8 @@ birthdayProto = <<
       \new Staff = "tuba2" \with {instrumentName="Tuba" midiInstrument=#"tuba"} \new Voice { \tuba }
     >>
     \new StaffGroup \with{instrumentName="Percussion"} <<
-      \new Staff = "timpani2" \with {instrumentName="Tuba" midiInstrument=#"timpani"} \new Voice { \timpani }
-      \new DrumStaff = "timpani2" \with {instrumentName="Tuba" midiInstrument=#"timpani"} \new DrumVoice { \percussion }
+      \new Staff = "timpani2" \with {instrumentName="Timpani" midiInstrument=#"timpani"} \new Voice { \timpani }
+      \new DrumStaff = "timpani2" \with {instrumentName="Cymbals" } \new DrumVoice { \percussion }
     >>
   >>
 
