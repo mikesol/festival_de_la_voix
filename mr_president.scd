@@ -15,122 +15,70 @@ ServerOptions.inDevices[2]
 Server.default.options.inDevice_(ServerOptions.inDevices[2])
 Server.default.options.outDevice_(ServerOptions.outDevices[1])
 
+~btest = Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/festival_de_la_voix/anniversaire/Bounces/joyeuxAnniversaire.aif")
+
 (
-z = [Buffer.read(s,"/Users/mikesolomon/dk/0.aif"),
+z = [
+
+Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/festival_de_la_voix/anniversaire/Bounces/Orchestra Bassoon_bip.aif"),
+Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/festival_de_la_voix/anniversaire/Bounces/Orchestra Clarinet 1_bip.aif"),
+Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/festival_de_la_voix/anniversaire/Bounces/Orchestra Flute 1_bip.aif"),
+Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/festival_de_la_voix/anniversaire/Bounces/Orchestra Flute 2_bip.aif"),
+Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/festival_de_la_voix/anniversaire/Bounces/Orchestra French Horn 1_bip.aif"),
+Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/festival_de_la_voix/anniversaire/Bounces/Orchestra French Horn 2_bip.aif"),
+Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/festival_de_la_voix/anniversaire/Bounces/Orchestra Oboe_bip.aif"),
+Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/festival_de_la_voix/anniversaire/Bounces/Orchestra Percussion Kit_bip.aif"),
+Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/festival_de_la_voix/anniversaire/Bounces/Orchestra Timpani_bip.aif"),
+Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/festival_de_la_voix/anniversaire/Bounces/Orchestra Trombone Section 1_bip.aif"),
+Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/festival_de_la_voix/anniversaire/Bounces/Orchestra Trombone Section 2_bip.aif"),
+Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/festival_de_la_voix/anniversaire/Bounces/Orchestra Trumpet 1_bip.aif"),
+Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/festival_de_la_voix/anniversaire/Bounces/Orchestra Trumpet 2_bip.aif"),
+Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/festival_de_la_voix/anniversaire/Bounces/Orchestra Trumpet 3_bip.aif"),
+Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/festival_de_la_voix/anniversaire/Bounces/Orchestra Tuba_bip.aif")
 ];
 
 )
 
 (
-z = [Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/norman43/bible/2001.aiff"),
-	Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/norman43/bible/2002.aiff"),
-	Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/norman43/bible/2003.aiff"),
-	Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/norman43/bible/2004.aiff"),
-	Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/norman43/bible/2005.aiff"),
-	Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/norman43/bible/2006.aiff"),
-	Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/norman43/bible/2007.aiff")
-];
-
+	SynthDef("buffer_reader_saw",{arg out, bufnum, startpos, duration, ep;
+	var buffy, env, envgen, saw;
+	buffy = PlayBuf.ar(2,bufnum,Line.kr(1,ep,3),startPos:startpos);
+	env = Env.new([0.0,1.0,1.0,0.0],[0.01,duration-0.02,0.01],'linear');
+	envgen = EnvGen.kr(env, doneAction:2);
+	saw = Saw.kr(SinOsc.kr(0.5, 0, 2, 5), 0.5, 0.5);
+	Out.ar(out,Pan2.ar(buffy)*envgen* saw);
+}).send(s);
 )
 
+{PlayBuf.ar(2,~btest,BufRateScale.kr(~btest))}.play;
+{PlayBuf.ar(2,~btest,*SinOsc.kr(0.2,0,0.1,1)*BufRateScale.kr(~btest))}.play;
+//{PlayBuf.ar(2,z[1], BufRateScale.kr(z[1]))}.play;
 
-(
-z = [Buffer.read(s,"/Users/mikesolomon/dk/final0.aif"),
-	Buffer.read(s,"/Users/mikesolomon/dk/final1.aif")
-];
 
-)
-
-(
-z = [Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/overtime/dJm1k3s0l/lePatronPart/splits/clap.aif"),
-Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/overtime/dJm1k3s0l/lePatronPart/splits/closedHH.aif"),
-Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/overtime/dJm1k3s0l/lePatronPart/splits/kick.aif"),
-Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/overtime/dJm1k3s0l/lePatronPart/splits/kick2.aif"),
-Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/overtime/dJm1k3s0l/lePatronPart/splits/sfx.aif"),
-Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/overtime/dJm1k3s0l/lePatronPart/splits/sfx2.aif"),
-Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/overtime/dJm1k3s0l/lePatronPart/splits/sfx3.aif"),
-Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/overtime/dJm1k3s0l/lePatronPart/splits/sfx4.aif"),
-Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/overtime/dJm1k3s0l/lePatronPart/splits/snare.aif"),
-Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/overtime/dJm1k3s0l/lePatronPart/splits/strike.aif"),
-Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/overtime/dJm1k3s0l/lePatronPart/splits/tom.aif"),
-Buffer.read(s,"/Users/mikesolomon/Documents/Compositions/overtime/dJm1k3s0l/lePatronPart/splits/unsaned.aif")
-];
-
-)
-
-{PlayBuf.ar(2,z[1])}.play;
-
-// normal
+// fuckn drunk!
 (
 {
-	var arr = Array.fill(7, {|i|
-		PlayBuf.ar(2,z[i], BufRateScale.kr(z[i]));
+	var happynumber = 0.1; // 3
+	var arr = Array.fill(z.size, {|i|
+		PlayBuf.ar(2,z[i], SinOsc.kr(happynumber*i, 0, 0.05, 1)*BufRateScale.kr(z[i]));
 	});
-	Out.ar(0, Mix.ar(arr), 0.2, 20);
-}.play
-)
-
-// cooler
-(
-{
-	var snd0 = PlayBuf.ar(2,z[0],BufRateScale.kr(z[0]) * SinOsc.kr(2, 0, 0.3, 1.3), Impulse.kr(0.2));
-	var snd1 = PlayBuf.ar(2,z[1],BufRateScale.kr(z[1]) * SinOsc.kr(2.1, 0, 0.4, 1.3), Impulse.kr(0.1));
-	var snd2 = PlayBuf.ar(2,z[2],BufRateScale.kr(z[2]) * SinOsc.kr(1.05, 0, 0.05, 1.3), Impulse.kr(0.25));
-	var snd3 = PlayBuf.ar(2,z[3],BufRateScale.kr(z[3]) * SinOsc.kr(2.4, 0, 0.2, 1.3), Impulse.kr(0.005));
-	var snd4 = PlayBuf.ar(2,z[4],BufRateScale.kr(z[4]) * SinOsc.kr(2.6, 0, 0.6, 1.3), Impulse.kr(0.05));
-	var snd5 = PlayBuf.ar(2,z[5],BufRateScale.kr(z[5]) * SinOsc.kr(3, 0, 0.35, 1.3), Impulse.kr(0.0));
-	var snd6 = PlayBuf.ar(2,z[6],BufRateScale.kr(z[6]) * SinOsc.kr(4.9, 0, 0.1, 1.3), Impulse.kr(1));
-
-	//Out.ar(0, snd0 + snd1 + snd2 + snd3 + snd4 + snd5 + snd6);
-	Out.ar(0, snd0 + snd1);
-}.play
-)
-
-// even cooler
-(
-{
-	var arr = Array.fill(7, {|i|
-		var freq = 2 + (i * 0.2);
-		var mul = 0.05 + (i * 0.05);
-		var add = 0.75 + (i * 0.15);
-		var trig = i * 0.1;
-		PlayBuf.ar(2,z[i], BufRateScale.kr(z[i]) * SinOsc.kr(freq, 0, mul, add), Impulse.kr(trig));
-	});
-	Out.ar(0, MonoGrain.ar(Mix.ar(arr), 0.2, 20)
-	);
-}.play
-)
-
-// unbridled joy
-(
-{
-	var arr = Array.fill(7, {|i|
-		var imp = 1;
-		var freq = Demand.kr(Impulse.kr(imp), 0, Drand(Array.fill(12, { |j| 2 + (j * 0.2) }), inf));
-		var mul = Demand.kr(Impulse.kr(imp), 0, Drand(Array.fill(12, { |j| 0.05 + (j * 0.05) }), inf));
-		var add = Demand.kr(Impulse.kr(imp), 0, Drand(Array.fill(12, { |j| 0.75 + (j * 0.15) }), inf));
-		var trig = Demand.kr(Impulse.kr(imp), 0, Drand(Array.fill(12, { |j| 0.00 + (j * 0.1) }), inf));
-		var snd = PlayBuf.ar(2,z[i], BufRateScale.kr(z[i]) * SinOsc.kr(freq, 0, mul, add), Impulse.kr(trig));
-		snd*Demand.kr(Impulse.kr(Demand.kr(Impulse.kr(100), 0, Dseq([0.2,1,2,0.5,5,0.3,2], inf))), 0, Drand([0,1], inf));
-	});
-	Out.ar(0, MonoGrain.ar(Mix.ar(arr), 0.2, 20)
-	);
+	Out.ar(0, Mix.ar(arr));
 }.play
 )
 
 (
-{
-	var orig = SoundIn.ar(0);
-	var total = 3;
-	Pan2.ar(Mix.ar(Array.fill(total, {|i| PitchShift.ar(orig, 0.2, 0.9 + (i * 0.1))*(1.0)})));
-}.play
+Routine({
+
+		var cap = 0.2 + 0;//(i/60.0);
+		Synth.new("buffer_reader_saw", [\out, 0, \bufnum, ~btest, \startpos, 0, \duration, 60, \ep, 0.9 + cap.rand]);
+
+}).play;
 )
 
-(
-{
-	Mix.ar(Array.fill(8, {|i|SoundIn.ar(i)}));
-}.play
-)
+
+play{t=Impulse.kr(14.0/3.0);PlayBuf.ar(2,~btest,1,t,Demand.kr(t,0,Dseq(1e3*Array.fill(8,{(Array.fill(8,{15+400.rand})!4).flatten}).flatten,inf)))!2}
+
+play{PitchShift.ar(PlayBuf.ar(2,~btest,1), 0.2, Demand.kr(Impulse.kr(0.25),0,Dseq([1.1,1.6,2.1,2.6],inf)))};
 
 s.prepareForRecord("/Users/mikesolomon/Documents/Compositions/overtime/dJm1k3s0l/audit/material7.wav");
 s.record;
