@@ -56,6 +56,12 @@ SynthDef("theGreatSineCaper", {arg out, happynumber=0.0, addr=1.0, span=0.05;
 	Out.ar(out, Mix.ar(arr));
 }).send(s);
 
+SynthDef("spreadEm", {arg out, happynumber=0.0, startPos=0;
+	var arr = Array.fill(z.size, {|i|
+		PlayBuf.ar(2,z[i], ((happynumber*i)+1)*BufRateScale.kr(z[i]), startPos: startPos);
+	});
+	Out.ar(out, Mix.ar(arr));
+}).send(s);
 
 
 SynthDef("pitchMadness", {arg out, happynumber=0.0, addr=1.0, span=0.05, triggy=1;
@@ -109,7 +115,9 @@ Routine.new({
 	});
 }).play;
 )
-{PlayBuf.ar(2,~btest,-1*BufRateScale.kr(~btest),0,44100*10)}.play
+{PlayBuf.ar(2,~btest,6*BufRateScale.kr(~btest),0,0)}.play
+
+Synth.new("spreadEm", [\out, 0, \happynumber, 0.01, \startPos, 11*~btest.sampleRate])
 
 ~sn = Synth.new("lagPlayBuf",[\out, 0, \bufnum, ~btest, \mult, 0.23, \startPos, ~btest.sampleRate*11.0]);
 ~sn.set(\mult, -1.0, \lag, 0.5);
@@ -216,6 +224,6 @@ play{t=Impulse.kr(SinOsc.kr(0.1, 0, 15,16));PlayBuf.ar(2,~btest,1,t,Demand.kr(t,
 
 play{PitchShift.ar(PlayBuf.ar(2,~btest,1), 0.2, Demand.kr(Impulse.kr(0.25),0,Dseq([1.1,1.6,2.1,2.6],inf)))};
 
-s.prepareForRecord("/Users/mikesolomon/Documents/Compositions/festival_de_la_voix/shits_fucked_up/glitchHARD.wav");
+s.prepareForRecord("/Users/mikesolomon/Documents/Compositions/festival_de_la_voix/shits_fucked_up/really_damn_fast.wav");
 s.record;
 s.stopRecording; // this closes the file and deallocates the buffer recording node, etc.
